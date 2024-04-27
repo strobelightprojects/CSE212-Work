@@ -34,13 +34,20 @@ public static class ArraysTester {
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     private static double[] MultiplesOf(double number, int length)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
 
-        return new double[0]; // replace this return statement with your own
+    // An array to store the multiples
+    double[] multiples = new double[length];
+    
+    //  The array with multiples of 'number'
+    for (int i = 0; i < length; i++)
+    {
+        multiples[i] = number * (i + 1);
     }
+
+    // Return the array
+    return multiples;
+}
+    
     
     /// <summary>
     /// Rotate the 'data' to the right by the 'amount'.  For example, if the data is 
@@ -57,5 +64,11 @@ public static class ArraysTester {
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
+    // Handle cases where amount is greater than the count of data
+    amount = amount % data.Count;
+
+    // Rotate the list to the right by amount
+    data.InsertRange(0, data.GetRange(data.Count - amount, amount));
+    data.RemoveRange(data.Count - amount, amount);
     }
 }
