@@ -1,12 +1,15 @@
-﻿/// <summary>
+﻿using System.ComponentModel;
+
+
+/// <summary>
 /// Maintain a Customer Service Queue.  Allows new customers to be 
 /// added and allows customers to be serviced.
 /// </summary>
 public class CustomerService {
     public static void Run() {
         // Example code to see what's in the customer service queue:
-        // var cs = new CustomerService(10);
-        // Console.WriteLine(cs);
+         var cs = new CustomerService(10);
+        Console.WriteLine(cs);
 
         // Test Cases
 
@@ -23,12 +26,42 @@ public class CustomerService {
         // Scenario: 
         // Expected Result: 
         Console.WriteLine("Test 2");
-
+        cs= new CustomerService(10);
+        cs. AddNewCustomer();
+        cs. ServeCustomer(); 
         // Defect(s) Found: 
 
         Console.WriteLine("=================");
 
         // Add more Test Cases As Needed Below
+
+     Console.WriteLine("Test 3");
+        cs= new CustomerService(0);
+
+        cs. ServeCustomer(); 
+    Console.WriteLine(cs);
+
+         Console.WriteLine("Test 4");
+        cs= new CustomerService(10);
+        cs. AddNewCustomer();
+        cs. AddNewCustomer();
+        cs. AddNewCustomer();
+
+        Console.WriteLine(cs);
+        cs. ServeCustomer(); 
+        cs. ServeCustomer(); 
+        cs. ServeCustomer(); 
+        Console.WriteLine(cs);
+
+
+
+        Console.WriteLine("Test 5");
+        cs. AddNewCustomer();
+        cs. AddNewCustomer();
+        cs. AddNewCustomer();
+        cs. AddNewCustomer();
+        cs. AddNewCustomer();
+        Console.WriteLine($"Service Queue: {cs}");
     }
 
     private readonly List<Customer> _queue = new();
@@ -90,7 +123,10 @@ public class CustomerService {
     private void ServeCustomer() {
         _queue.RemoveAt(0);
         var customer = _queue[0];
-        Console.WriteLine(customer);
+        if (_queue.Count >= 0)
+        {
+            Console.WriteLine("No Customers in the queue");
+        }
     }
 
     /// <summary>
