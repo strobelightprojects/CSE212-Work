@@ -114,25 +114,21 @@ public static class SetsAndMapsTester
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
-        HashSet<string> set = new HashSet<string>();
-
-        foreach (string word in words)
+        HashSet<string> seen = new HashSet<string>();
+        foreach (var word in words)
         {
-            string reverse = Reverse(word);
-            if (set.Contains(reverse) && word != reverse)
+            var pair = new string(word.Reverse().ToArray());
+            if (seen.Contains(pair) && word != pair)
             {
-                Console.WriteLine($"{word} & {reverse}");
+                Console.WriteLine($"{word} & {pair}");
+                seen.Remove(pair);
             }
-            set.Add(word);
+            else
+            {
+                seen.Add(word);
+            }
         }
     }
-    public static string Reverse(string input)
-    {
-        char[] charA = input.ToCharArray();
-        Array.Reverse(charA);
-        return new string(charA);
-    }
-
     /// <summary>
     /// Read a census file and summarize the degrees (education)
     /// earned by those contained in the file.  The summary
@@ -154,11 +150,24 @@ public static class SetsAndMapsTester
         {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
-            
+
+            string degree = fields[3].Trim();
+            {
+                if (degrees.ContainsKey(degree))
+                {
+                    degrees[degree]++;
+                }
+                else
+                {
+                    degrees[degree] = 1;
+                }
+            }
         }
 
         return degrees;
     }
+
+
 
     /// <summary>
     /// Determine if 'word1' and 'word2' are anagrams.  An anagram
