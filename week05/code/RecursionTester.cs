@@ -254,7 +254,6 @@ public static class RecursionTester
             remember = new Dictionary<int, decimal>();
         }
 
-        // Check if the value is already in the dictionary
         if (remember.ContainsKey(s))
         {
             return remember[s];
